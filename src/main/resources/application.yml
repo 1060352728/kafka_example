@@ -3,29 +3,28 @@ server:
 spring:
   kafka:
     # 指定kafka 代理地址，可以多个192.168.138.128:9092,192.168.138.129:9092,192.168.138.130:9092,192.168.138.131:9092,192.168.138.132:9092
-    bootstrap-servers: 127.0.0.1:9092
+    bootstrap-servers: 192.168.138.128:9092,192.168.138.129:9092,192.168.138.130:9092
     producer:
-      retries: 0
+      retries: 3
       # 每次批量发送消息的数量
       batch-size: 16384
       # 缓存容量
-      buffer-memory: 335544320
+      buffer-memory: 10485760000
       # 指定消息key和消息体的编解码方式
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       properties:
-        max.request.size: 150000000
+        max.request.size: 104857600
+        #offsets.topic.replication.factor: 3
     consumer:
       # 指定默认消费者group id
-      group-id: consumer-tutorial
+      group-id: consumer-group-007
       auto-commit-interval: 100
       auto-offset-reset: earliest
       enable-auto-commit: true
       # 指定消息key和消息体的编解码方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      #properties:
-       # max.partition.fetch.bytes: 150000000
     # 指定listener 容器中的线程数，用于提高并发量
     listener:
       concurrency: 3

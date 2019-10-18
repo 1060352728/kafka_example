@@ -49,4 +49,10 @@ public class KafkaController {
         }
         return "SUCCESS";
     }
+
+    @GetMapping("/elk")
+    public String testelk() {
+        log.error("测试elk");
+        return "SUCCESS";
+    }
 }

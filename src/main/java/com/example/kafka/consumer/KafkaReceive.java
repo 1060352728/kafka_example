@@ -20,7 +20,7 @@ import java.util.Optional;
 @Component
 public class KafkaReceive {
 
-    @KafkaListener(id = "consumer-tutorial", topics = "kafka.cust")
+    @KafkaListener(groupId = "consumer-group-007", topics = "kafka.test007")
     public void listen(ConsumerRecord<?, ?> record, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         //判断是否NULL
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());

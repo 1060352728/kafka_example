@@ -28,16 +28,13 @@ public class KafkaSender<T> {
      */
     public void send(T obj) {
         String jsonObj = JSON.toJSONString(obj);
-        log.info("------------ message = {}", jsonObj);
         //发送消息
-        ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send("kafka.cust", jsonObj);
+        ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send("kafka.test007", jsonObj);
 
         future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
-
             @Override
             public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
-                log.info("Produce: The message was sent successfully:");
-                log.info("Produce: _+_+_+_+_+_+_+ result: " + stringObjectSendResult.toString());
+                log.info("Produce:The message was sent successfully: " + stringObjectSendResult.toString());
             }
 
             @Override
